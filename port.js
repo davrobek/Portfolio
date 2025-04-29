@@ -212,12 +212,12 @@ typedInstance = new Typed(".typedText", {
   backDelay: 2000,
 });
 
-// ScrollReveal animatsiyasi
+// Ensure ScrollReveal is initialized and applied correctly
 const sr = ScrollReveal({
   origin: "top",
   distance: "80px",
   duration: 2000,
-  reset: true,
+  reset: true, // Ensure animations reset on scroll
 });
 
 sr.reveal(".featured-text-card", {});
@@ -229,6 +229,7 @@ sr.reveal(".featured-image", { delay: 300 });
 sr.reveal(".project-box", { interval: 200 });
 sr.reveal(".top-header", {});
 
+// Ensure left and right animations are applied
 const srLeft = ScrollReveal({
   origin: "left",
   distance: "80px",
@@ -271,6 +272,24 @@ function scrollActive() {
   });
 }
 
+// Day-Night Mode Toggle
+function toggleDayNight() {
+    const body = document.body;
+    const toggleButton = document.getElementById("dayNightToggle");
+
+    // Toggle the 'night-mode' class on the body
+    body.classList.toggle("night-mode");
+
+    // Update the button text and icon
+    if (body.classList.contains("night-mode")) {
+        toggleButton.innerHTML = "☀️ Day Mode";
+    } else {
+        toggleButton.innerHTML = "🌙 Night Mode";
+    }
+}
+
+// Add event listener for the toggle button
+document.getElementById("dayNightToggle").addEventListener("click", toggleDayNight);
 
 // Forma yuborishni boshqarish
 document.getElementById('contactForm').addEventListener('submit', function(e) {

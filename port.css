@@ -263,21 +263,28 @@ nav {
     width: 50%;
 }
 .image {
-    margin: auto 0;
-    width: 380px;
-    height: 380px;
-    animation: imgFloat 7s ease-in-out infinite;
+    margin-top: 150px;
+    width: 450px;
+    height: 400px;
+    animation: imgFloat 2s ease-in-out infinite; /* Ensure animation is applied */
+
 }
 .image img {
-    width: 460px;
-    height: 460px;
-    object-fit: contain;
+    width: 550px;
+    height: 350px;
+    border: 2px solid rgb(147, 43, 156) !important; /* Ensure the border is visible */
+    border-radius: 20%; /* Apply rounded corners */
 }
+
 @keyframes imgFloat {
+    0%, 100% {
+        transform: translateY(0); /* Ensure the animation starts and ends at the same position */
+    }
     50% {
-        transform: translateY(10px);
+        transform: translateY(10px); /* Float effect */
     }
 }
+
 .scroll-btn {
     position: absolute;
     bottom: 0;
@@ -743,4 +750,80 @@ footer {
 }
 .send-btn:hover {
     background: #00B5E7;
+}
+
+/* Day-Night Toggle Button */
+#dayNightToggle {
+    width: 140px; /* Adjusted width for better appearance */
+    height: 45px; /* Adjusted height for better appearance */
+    background: var(--second-color); /* Match navbar button background */
+    color: var(--color-white); /* Match navbar button text color */
+    border: none;
+    border-radius: 25px; /* Rounded corners for a pill-shaped button */
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.4s ease, color 0.4s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+#dayNightToggle:hover {
+    background: var(--first-color-hover); /* Hover effect */
+    color: var(--color-white);
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Night Mode Styles */
+body.night-mode {
+    --body-color: rgb(30, 30, 30);
+    --color-white: rgb(255, 255, 255);
+    --text-color-second: rgb(200, 200, 200);
+    --text-color-third: rgb(100, 200, 255);
+    --first-color: rgb(50, 50, 150);
+    --first-color-hover: rgb(30, 30, 120);
+    --second-color: rgb(50, 50, 150);
+    --third-color: rgb(150, 100, 30);
+    --first-shadow-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--body-color);
+    color: var(--text-color-second);
+    transition: background-color 0.4s ease, color 0.4s ease; /* Smooth transition */
+}
+
+body.night-mode nav {
+    background: var(--body-color);
+    transition: background 0.4s ease; /* Smooth transition for navbar */
+}
+
+body.night-mode .btn {
+    background: var(--second-color);
+    color: var(--color-white);
+}
+
+body.night-mode .btn:hover {
+    background: var(--first-color-hover);
+    color: var(--color-white);
+}
+
+body.night-mode h1, 
+body.night-mode h2, 
+body.night-mode h3, 
+body.night-mode p, 
+body.night-mode span {
+    color: var(--color-white); /* Ensure text is visible in night mode */
+}
+
+body.night-mode .nav-link {
+    color: var(--color-white); /* Navbar links */
+}
+
+body.night-mode .nav-link:hover {
+    color: var(--text-color-third); /* Hover effect for navbar links */
+}
+
+body.night-mode footer {
+    background: var(--body-color);
+    color: var(--text-color-second);
 }
