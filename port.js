@@ -29,6 +29,18 @@ function headerShadow() {
 // Typing effekt uchun global o'zgaruvchi
 let typedInstance;
 
+// Utility function to update text content
+function updateTextContent(selector, text) {
+    const element = document.querySelector(selector);
+    if (element) element.textContent = text;
+}
+
+// Utility function to update inner HTML
+function updateInnerHTML(selector, html) {
+    const element = document.querySelector(selector);
+    if (element) element.innerHTML = html;
+}
+
 // Tilni o'zgartirish funksiyasi
 function changeLanguage(lang) {
   const translations = {
@@ -45,8 +57,8 @@ function changeLanguage(lang) {
           phone: "Telefon",
           footerText: "Barcha huquqlar himoyalangan.",
           scrollDown: "Pastga aylantiring",
-          aboutHeader: "Haqimda",
-          aboutDescription: "Men kiberxavfsizlik va veb-dasturlash bo'yicha nazariy bilimlarga ega bo'lgan mutaxassisman. Amaliy tajriba orttirishga intilaman.",
+          aboutHeader: "Men haqimda",
+          aboutDescription: "Men — kiberxavfsizlik va axborot xavfsizligi bo‘yicha mutaxassisman. Xavfsizlik siyosatlari, tarmoq va tizim xavfsizligi, zaifliklarni aniqlash va ularni bartaraf etish bo‘yicha tajribaga egaman. Kiber tahdidlarga qarshi ilg‘or himoya choralarini ishlab chiqish hamda xavfsiz infratuzilma yaratish ustida ishlayman. Qo‘shimcha ravishda, web dasturlarda xavfsizlikni ta'minlash maqsadida web development sohasida ham faoliyat yuritaman.",
           certificatesHeader: "Sertifikatlar",
           contactHeader: "Bog'lanish",
           contactSubtext: "Agar loyihangiz bo'lsa, bu yerda bog'laning",
@@ -72,7 +84,7 @@ function changeLanguage(lang) {
           footerText: "All rights reserved.",
           scrollDown: "Scroll Down",
           aboutHeader: "About Me",
-          aboutDescription: "I am a cybersecurity and web development specialist with strong theoretical knowledge. I am eager to gain practical experience.",
+          aboutDescription: "I am a specialist in cybersecurity and information security. I have experience in security policies, network and system security, identifying vulnerabilities, and mitigating them. I work on developing advanced protection measures against cyber threats and creating secure infrastructures. Additionally, I am active in web development to ensure security in web applications.",
           certificatesHeader: "Certificates",
           contactHeader: "Get in touch",
           contactSubtext: "Do you have a project in mind? Contact me here",
@@ -98,7 +110,7 @@ function changeLanguage(lang) {
           footerText: "Все права защищены.",
           scrollDown: "Прокрутите вниз",
           aboutHeader: "Обо мне",
-          aboutDescription: "Я специалист по кибербезопасности и веб-разработке с сильными теоретическими знаниями. Стремлюсь получить практический опыт.",
+          aboutDescription: "Я специалист по кибербезопасности и информационной безопасности. У меня есть опыт в разработке политик безопасности, защите сетей и систем, выявлении уязвимостей и их устранении. Я занимаюсь разработкой передовых мер защиты от киберугроз и созданием безопасной инфраструктуры. Кроме того, я активно работаю в области веб-разработки для обеспечения безопасности веб-приложений.",
           certificatesHeader: "Сертификаты",
           contactHeader: "Связаться",
           contactSubtext: "У вас есть проект? Свяжитесь со мной здесь",
@@ -112,85 +124,78 @@ function changeLanguage(lang) {
       }
   };
 
-  // Matnlarni o'zgartirish
-  document.getElementById("langBtn").innerText = lang;
-  document.querySelector(".nav-link.active-link").textContent = translations[lang].home;
-  document.querySelectorAll(".nav-link")[1].textContent = translations[lang].about;
-  document.querySelectorAll(".nav-link")[2].textContent = translations[lang].certificates;
-  document.querySelectorAll(".nav-link")[3].textContent = translations[lang].contact;
+  const t = translations[lang];
 
-  document.querySelector(".featured-text-info").textContent = translations[lang].introduction;
-  document.querySelector(".btn.blue-btn").textContent = translations[lang].hireMe;
+  // Update navigation links
+  document.querySelectorAll(".nav-link").forEach((link, index) => {
+      const keys = ["home", "about", "certificates", "contact"];
+      link.textContent = t[keys[index]];
+  });
 
-  // Barcha "Download CV" tugmalarini o'zgartirish
+  // Update featured section
+  updateTextContent(".featured-text-info", t.introduction);
+  updateTextContent(".btn.blue-btn", t.hireMe);
+
+  // Update "Download CV" buttons
   document.querySelectorAll(".download-cv-btn").forEach(button => {
-      button.innerHTML = `${translations[lang].downloadCV} <i class="uil uil-file-alt"></i>`;
-      button.onclick = function () {
+      button.innerHTML = `${t.downloadCV} <i class="uil uil-file-alt"></i>`;
+      button.onclick = () => {
           const link = document.createElement("a");
-          link.href = translations[lang].cvFile;
-          link.download = translations[lang].cvFile;
+          link.href = t.cvFile;
+          link.download = t.cvFile;
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
       };
   });
 
-  document.querySelector(".top-header span").textContent = translations[lang].getInTouch;
-  document.querySelector(".contact-info p:nth-child(2)").innerHTML = `<i class="uil uil-envelope"></i> ${translations[lang].email}: davronbekibodov9557@gmail.com`;
-  document.querySelector(".contact-info p:nth-child(3)").innerHTML = `<i class="uil uil-phone"></i> ${translations[lang].phone}: +998 33 734 9557`;
+  // Update about section
+  updateTextContent("#about .top-header h1", t.aboutHeader);
+  updateTextContent("#about .about-info h3", t.myIntroduction);
+  updateTextContent("#about .about-info p", t.aboutDescription);
 
-  // Section: About
-  document.querySelector("#about .top-header h1").textContent = translations[lang].aboutHeader;
-  document.querySelector("#about .about-info h3").textContent = translations[lang].myIntroduction;
-  document.querySelector("#about .about-info p").textContent = translations[lang].aboutDescription;
+  // Update certificates section
+  updateTextContent("#projects .top-header h1", t.certificatesHeader);
 
-  // Section: Certificates
-  document.querySelector("#projects .top-header h1").textContent = translations[lang].certificatesHeader;
+  // Update contact section
+  updateTextContent("#contact .top-header h1", t.contactHeader);
+  updateTextContent("#contact .top-header span", t.contactSubtext);
+  updateInnerHTML(".contact-info p:nth-child(2)", `<i class="uil uil-envelope"></i> ${t.email}: davronbekibodov9557@gmail.com`);
+  updateInnerHTML(".contact-info p:nth-child(3)", `<i class="uil uil-phone"></i> ${t.phone}: +998 33 734 9557`);
+  updateInnerHTML("#contact .contact-info h2", `${t.findMe} <i class="uil uil-corner-right-down"></i>`);
 
-  // Section: Contact
-  document.querySelector("#contact .top-header h1").textContent = translations[lang].contactHeader;
-  document.querySelector("#contact .top-header span").textContent = translations[lang].contactSubtext;
+  // Update footer
+  updateTextContent(".nav-name", t.name);
+  updateTextContent(".featured-text-card span", t.name);
+  updateTextContent("footer .top-footer p", t.name);
+  updateInnerHTML("footer .bottom-footer p", `Copyright © <a href="#home" style="text-decoration: none;">${t.name}</a> - ${t.footerText}`);
 
-  // Find Me
-  document.querySelector("#contact .contact-info h2").innerHTML = `${translations[lang].findMe} <i class="uil uil-corner-right-down"></i>`;
+  // Update scroll down text
+  updateTextContent(".scroll-icon-box p", t.scrollDown);
 
-  // Davronbek Ibodov matnlarini o'zgartirish
-  document.querySelector(".nav-name").textContent = translations[lang].name;
-  document.querySelector(".featured-text-card span").textContent = translations[lang].name;
-  document.querySelector("footer .top-footer p").textContent = translations[lang].name;
-  document.querySelector("footer .bottom-footer a").textContent = translations[lang].name;
+  // Update send button
+  updateTextContent(".send-btn", t.send);
 
-  // Pastki qism (footer)
-  document.querySelector("footer .bottom-footer p").innerHTML = `Copyright © <a href="#home" style="text-decoration: none;">${translations[lang].name}</a> - ${translations[lang].footerText}`;
-
-  // Scroll down matni
-  document.querySelector(".scroll-icon-box p").textContent = translations[lang].scrollDown;
-
-  // "Send" tugmasi matnini o'zgartirish
-  const sendButton = document.querySelector(".send-btn");
-  if (sendButton) {
-      sendButton.textContent = translations[lang].send;
-  }
-
-  // Pronoun-text ni o'zgartirish va qora rangga bo'yash
+  // Update pronoun text
   const pronounTextElement = document.querySelector(".pronoun-text");
-  pronounTextElement.textContent = translations[lang].pronounText;
-  pronounTextElement.style.color = "black"; // Qora rang qo'shildi
+  pronounTextElement.textContent = t.pronounText;
+  pronounTextElement.style.color = "black";
 
-  // Typed.js ni yangilash
-  if (typedInstance) {
-      typedInstance.destroy(); // Avvalgi Typed instanceni o'chirish
-  }
+  // Update Typed.js
+  if (typedInstance) typedInstance.destroy();
   typedInstance = new Typed(".typedText", {
-      strings: translations[lang].typedStrings,
+      strings: t.typedStrings,
       loop: true,
       typeSpeed: 100,
       backSpeed: 80,
-      backDelay: 2000,
+      backDelay: 2000
   });
 
-  // Dropdown menyuni yopish
+  // Close dropdown menu
   document.querySelector("#langList").style.display = "none";
+
+  // Update the language button text when a language is selected
+  document.getElementById("langBtn").innerText = lang;
 }
 
 // Dropdown menyuni ochish va yopish
@@ -327,4 +332,10 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 
   e.preventDefault(); // Agar fetch ishlatilsa, bu qator qoladi
 });
+
+// Default language setup
+document.addEventListener("DOMContentLoaded", function () {
+    changeLanguage("Eng"); // Set default language to English
+});
+
 window.addEventListener("scroll", scrollActive);

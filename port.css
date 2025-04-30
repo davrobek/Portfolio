@@ -324,7 +324,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
+    padding: 0 20px; /* Add padding for dynamic width */
     height: 50px;
     gap: 5px;
     text-decoration: none;
@@ -332,6 +332,8 @@ nav {
     background: var(--color-white);
     border-radius: 30px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+    white-space: nowrap; /* Ensure text stays on one line */
+    transition: width 0.3s ease; /* Smooth transition for width changes */
 }
 .scroll-btn i {
     font-size: 20px;
@@ -340,6 +342,12 @@ nav {
 .section {
     padding-block: 5em;
 }
+
+.section#contact {
+    padding: 0px; /* Remove padding for the contact section */
+    margin: 0px; /* Remove any margin */
+}
+
 .row {
     display: flex;
     justify-content: space-between;
@@ -353,7 +361,7 @@ nav {
 
 .top-header {
     text-align: center;
-    margin-bottom: 5em;
+    margin-bottom: 0.5em; /* Further reduce bottom margin */
 }
 .top-header h1 {
     font-weight: 600;
@@ -381,6 +389,7 @@ h3 {
     background: var(--color-white);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     border-radius: 20px;
+    border: 0.5px solid rgb(110, 87, 224); /* Add border */
 }
 .about-info p {
     text-align: center;
@@ -514,13 +523,14 @@ h3 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px 30px;
+    padding: 10px 20px; /* Adjust padding for better spacing */
     width: 100%;
-    height: 315px;
+    height: 400px; /* Increase the height of the Find me box */
     background: var(--second-color);
     border-radius: 10px;
     box-shadow: 1px 8px 10px 2px var(--first-shadow-color);
     overflow: hidden;
+    margin: 0px; /* Remove any extra margin */
 }
 .contact-info > h2 {
     color: var(--color-white);
@@ -545,9 +555,17 @@ h3 {
     color: #777;
     z-index: 2;
 }
+.contact-info:hover h2,
+.contact-info:hover p,
+.contact-info:hover i {
+    color: rgb(110, 87, 224); /* Change text color on hover */
+}
+.contact-info:hover .contact-text {
+    color: rgb(110, 87, 224); /* Change text color on hover */
+}
 
 .form-control {
-    display: flex;
+    display: flex; 
     flex-direction: column;
     gap: 10px;
     width: 100%;
@@ -599,6 +617,7 @@ footer {
     row-gap: 30px;
     background: #F8F8F8;
     padding-block: 40px 60px;
+    margin-top: 2em; /* Reduce space between Find me and footer */
 }
 .top-footer p {
     font-size: 25px;
@@ -897,4 +916,63 @@ body.night-mode .nav-link:hover {
 body.night-mode footer {
     background: var(--body-color);
     color: var(--text-color-second);
+}
+
+/* Hover Effect */
+.hover-effect {
+    position: relative;
+    transition: background-color 1.5s ease, border-color 2s ease, color 2s ease; /* Smooth transitions */
+    border: 0.5px solid transparent; /* Default border */
+}
+
+.hover-effect:hover {
+    background-color: var(--color-white); /* Change background to white */
+    border-color: rgb(110, 87, 224); /* Change border color */
+    color: rgb(110, 87, 224); /* Change text color */
+}
+
+.hover-effect:hover h2,
+.hover-effect:hover p,
+.hover-effect:hover i {
+    color: rgb(110, 87, 224); /* Ensure text changes to rgb(110, 87, 224) */
+}
+
+.hover-effect::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0.5px solid rgb(110, 87, 224); /* Border animation */
+    z-index: -1;
+    transition: border-color 2s ease; /* Smooth border color transition */
+}
+
+.expanded-box {
+    width: 100%; /* Expand to occupy full width */
+    height: auto; /* Adjust height dynamically */
+    padding: 40px; /* Add padding for better spacing */
+    text-align: center; /* Center-align text */
+}
+
+.centered-contact {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 100%; /* Occupy full width */
+    height: 100vh; /* Occupy full height of the viewport */
+    margin: 0 auto; /* Ensure no alignment to left or right */
+    text-align: center; /* Center-align text */
+    position: relative; /* Ensure proper positioning */
+}
+
+.centered-container {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: calc(100vh - 6em); /* Further reduce height to minimize spacing */
+    position: relative; /* Ensure proper positioning */
+    margin: 0px; /* Ensure no extra margin */
+    padding: 0px; /* Ensure no extra padding */
 }
