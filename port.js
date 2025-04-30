@@ -252,25 +252,29 @@ srRight.reveal(".form-control", { delay: 100 });
 
 // Scroll aktiv linkni boshqarish
 const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav-link");
+
 function scrollActive() {
-  const scrollY = window.scrollY;
+    const scrollY = window.pageYOffset;
 
-  sections.forEach((current) => {
-      const sectionHeight = current.offsetHeight;
-      const sectionTop = current.offsetTop - 50;
-      const sectionId = current.getAttribute("id");
+    sections.forEach((current) => {
+        const sectionHeight = current.offsetHeight;
+        const sectionTop = current.offsetTop - 50; // Adjust for header height
+        const sectionId = current.getAttribute("id");
 
-      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-          document
-              .querySelector(".nav-menu a[href*=" + sectionId + "]")
-              .classList.add("active-link");
-      } else {
-          document
-              .querySelector(".nav-menu a[href*=" + sectionId + "]")
-              .classList.remove("active-link");
-      }
-  });
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            document
+                .querySelector(`.nav-link[href="#${sectionId}"]`)
+                .classList.add("active-link");
+        } else {
+            document
+                .querySelector(`.nav-link[href="#${sectionId}"]`)
+                .classList.remove("active-link");
+        }
+    });
 }
+
+window.addEventListener("scroll", scrollActive);
 
 // Day-Night Mode Toggle
 function toggleDayNight() {

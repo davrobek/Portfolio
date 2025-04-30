@@ -120,6 +120,21 @@ nav {
     padding-inline: 15px;
     margin-inline: 20px;
 }
+.nav-link.active-link {
+    color: var(--first-color) !important; /* Highlight the active link */
+}
+
+.nav-link.active-link::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background: var(--first-color);
+    border-radius: 50%;
+}
 .nav-menu-btn {
     display: none;
 }
@@ -206,12 +221,13 @@ nav {
 }
 .icon {
     display: flex;
+    border: 1px solid rgb(30, 159, 171);
     justify-content: center;
     align-items: center;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #f0f0f0; /* Fon rangi qo'shildi */
+    background-color: #f0f0f0; /* This line sets the icon's background */
     color: #333; /* Ikonka rangi */
     text-decoration: none;
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25); /* Soyali effekt */
@@ -221,6 +237,7 @@ nav {
     transform: scale(1.2) rotate(360deg); /* Hoverda kattalashib, 360 gradusga aylanadi */
     background-color: var(--text-color-third); /* Hoverda fon rangi o'zgaradi */
     color: var(--color-white); /* Hoverda ikonka oq rangga aylanadi */
+  
 }
 
 /* Har bir ikonka uchun individual hover ranglari */
@@ -255,6 +272,19 @@ nav {
     transition: transform 0.3s ease, background-color 0.3s ease; /* Tranzitsiya */
 }
 
+.social_icons .icon:hover i {
+    color: white !important; /* Ensure the color changes to white on hover */
+}
+
+.social_icons .icon.hh-icon:hover {
+    color: white !important; /* Ensure the text color changes to white on hover */
+}
+
+.footer-social-icons .icon:hover i,
+.footer-social-icons .icon.hh-icon:hover {
+    color: white !important; /* Ensure the text color changes to white on hover */
+}
+
 .featured-image {
     display: flex;
     justify-content: right;
@@ -272,8 +302,9 @@ nav {
 .image img {
     width: 550px;
     height: 350px;
-    border: 2px solid rgb(147, 43, 156) !important; /* Ensure the border is visible */
-    border-radius: 20%; /* Apply rounded corners */
+    border: 2px solid rgb(30, 159, 171) !important; /* Ensure the border is visible */
+    border-top-left-radius: 25%; 
+    border-bottom-right-radius: 30%;
 }
 
 @keyframes imgFloat {
@@ -395,47 +426,86 @@ h3 {
     flex-wrap: wrap;
 }
 .project-box {
-    text-align: center;
     position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 30%;
     height: 250px;
-    background: var(--color-white);
+    background-color: var(--color-white); /* Default white background */
+    border: 1px solid var(--first-color); /* Add 1px solid border matching icon color */
     border-radius: 20px;
     box-shadow: #110c2e26 0px 48px 100px 0px;
     overflow: hidden;
+    transition: transform 0.3s ease, background 0.3s ease;
 }
-.project-box > i {
-    font-size: 50px;
-    color: #00B5E7;
-    margin-bottom: 25px;
+
+.project-box i {
+    font-size: 50px; /* Restore original icon size */
+    color: var(--first-color); /* Restore original icon color */
+    margin-bottom: 15px;
+    transition: opacity 0.3s ease;
 }
+
+.project-box h3,
 .project-box label {
-    font-size: 18px;
-    color: #777;
+    color: var(--text-color-second); /* Restore original text color */
+    text-align: center; /* Ensure text is centered */
+    transition: opacity 0.3s ease;
 }
-.project-box::after, .contact-info::after {
-    content: "";
+
+.project-box:hover {
+    transform: scale(1.05);
+}
+
+.project-box:hover i,
+.project-box:hover h3,
+.project-box:hover label {
+    opacity: 0; /* Hide text and icons on hover */
+}
+
+.project-box::before {
+    content: '';
     position: absolute;
-    bottom: -100%;
-    background: var(--second-color);
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    transition: .4s;
-    z-index: 1;
+    background-size: cover !important; /* Ensure the image is applied */
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-color: transparent; /* Ensure no background color overlaps */
+    opacity: 0; /* Default state: hidden */
+    transition: opacity 0.3s ease;
+    z-index: 1; /* Ensure it appears above the background */
 }
-.project-box:hover.project-box::after,
-.contact-info:hover.contact-info::after {
-    bottom: 0;
+
+/* ISC2 box hover behavior */
+.isc2-box::before {
+    background-image: url('img/isc2.jpg'); /* ISC2 image */
 }
-.project-box:hover.project-box i,
-.project-box:hover.project-box > h3,
-.project-box:hover.project-box > label {
-    color: var(--color-white);
-    z-index: 2;
+
+.isc2-box:hover::before {
+    opacity: 1; /* Show the image on hover */
+}
+
+/* CISCO box hover behavior */
+.cisco-box::before {
+    background-image: url('img/cisco.jpg'); /* CISCO image */
+}
+
+.cisco-box:hover::before {
+    opacity: 1; /* Show the image on hover */
+}
+
+/* Haad TC box hover behavior */
+.haad-box::before {
+    background-image: url('img/haad.jpg'); /* Haad TC image */
+}
+
+.haad-box:hover::before {
+    opacity: 1; /* Show the image on hover */
 }
 
 .contact-info {
@@ -549,6 +619,7 @@ footer {
 .footer-social-icons {
     display: flex;
     gap: 30px;
+
 }
 .footer-social-icons .icon {
     display: flex;
