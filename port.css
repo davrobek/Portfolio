@@ -128,7 +128,7 @@ nav {
     content: '';
     position: absolute;
     left: 50%;
-    bottom: -5px;
+    bottom: -5px; /* Adjusted to prevent shifting */
     transform: translateX(-50%);
     width: 5px;
     height: 5px;
@@ -448,6 +448,34 @@ h3 {
     box-shadow: #110c2e26 0px 48px 100px 0px;
     overflow: hidden;
     transition: transform 0.3s ease, background 0.3s ease;
+}
+.project-box1{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 250px;
+    background-color: var(--color-white); /* Default white background */
+    border: 1px solid var(--first-color); /* Add 1px solid border matching icon color */
+    border-radius: 20px;
+    box-shadow: #110c2e26 0px 48px 100px 0px;
+    overflow: hidden;
+    transition: transform 0.3s ease, background 0.3s ease;
+    margin-left: auto; /* Push to the right */
+    margin-right: auto; /* Push to the left */
+}
+.project-box1 i {
+        font-size: 50px; /* Restore original icon size */
+        color: var(--first-color); /* Restore original icon color */
+        margin-bottom: 15px;
+        transition: opacity 0.3s ease;
+}
+
+/* Ensure h3 inside project-box1 turns white on hover */
+.project-box1:hover h3 {
+    color: var(--color-white) !important; /* Change h3 text color to white */
 }
 
 .project-box i {
@@ -771,6 +799,7 @@ footer {
 .nav-button {
     position: relative;
     display: inline-block;
+    margin-right: 10px; /* Add margin to create space */
 }
 
 .btn {
@@ -975,4 +1004,80 @@ body.night-mode footer {
     position: relative; /* Ensure proper positioning */
     margin: 0px; /* Ensure no extra margin */
     padding: 0px; /* Ensure no extra padding */
+}
+
+/* Work Experience Section Styles */
+.work-experience {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4em 2em;
+    background-color: var(--color-white);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-experience:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.work-experience h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-color-second);
+    margin-bottom: 10px;
+}
+
+.work-experience p {
+    font-size: 14px;
+    color: var(--text-color-second);
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* Ensure no image appears on hover */
+.work-experience::before {
+    content: none;
+}
+
+/* Hov-Col Class Styles */
+.hov-col {
+    position: relative; /* Ensure proper layering */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    z-index: 0; /* Set default layering */
+}
+
+.hov-col:hover {
+    background-color: var(--first-color); /* Change background to icon color */
+    color: var(--color-white) !important; /* Ensure text color is white */
+    z-index: 1; /* Bring to front on hover */
+}
+
+.hov-col:hover i {
+    color: var(--color-white) !important; /* Ensure icon color is white */
+    z-index: 2; /* Ensure icon is above background */
+}
+
+/* Centering Box in Work Experience Section */
+.center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure it takes full height of the container */
+}
+
+/* Ensure consistent size for 'Download CV' button */
+.download-cv-btn {
+    min-width: 150px; /* Set a minimum width */
+    max-width: 200px; /* Set a maximum width */
+    text-align: center; /* Ensure text is centered */
+    padding: 10px 15px; /* Adjust padding for better fit */
+    font-size: 14px; /* Adjust font size for smaller text */
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow if text is too long */
+    text-overflow: ellipsis; /* Add ellipsis for long text */
+    margin-left: 10px; /* Add margin to create space */
 }
