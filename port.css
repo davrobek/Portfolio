@@ -544,6 +544,13 @@ h3 {
 .haad-box:hover::before {
     opacity: 1; /* Show the image on hover */
 }
+.icip-box::before {
+    background-image: url('img/ICIP.png'); /* ICIP image */
+}
+
+.icip-box:hover::before {
+    opacity: 1; /* Show the image on hover */
+}
 
 .contact-info {
     position: relative;
